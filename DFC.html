@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFC | Destiny Fighting Championship - Master Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Space+Grotesk:wght@300;400;700&display=swap');
+
+        :root {
+            --taxi-yellow: #facc15;
+            --dfc-blue: #0ea5e9;
+            --dfc-red: #ef4444;
+            --bg-dark: #050507;
+            --glass-bg: rgba(15, 15, 20, 0.85);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
+            font-family: 'Space Grotesk', sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(250, 204, 21, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .taxi-gradient {
+            background: linear-gradient(90deg, var(--taxi-yellow) 0%, #eab308 100%);
+        }
+
+        .blue-glow {
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+            border: 1px solid rgba(14, 165, 233, 0.5);
+        }
+
+        .yellow-glow {
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.3);
+            border: 1px solid rgba(250, 204, 21, 0.5);
+        }
+
+        .red-glow {
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .tab-btn.active {
+            background: var(--taxi-yellow);
+            color: black;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--taxi-yellow);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .gauntlet-step {
+            position: relative;
+        }
+
+        .gauntlet-step::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            width: 15px;
+            height: 2px;
+            background: var(--dfc-blue);
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .relegation-pulse {
+            animation: pulse-red 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- NAVIGATION -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4 border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="taxi-gradient p-2 rounded flex items-center justify-center">
+                    <span class="text-black font-black orbitron text-2xl tracking-tighter leading-none">DFC</span>
+                </div>
+                <div class="h-8 w-px bg-white/20"></div>
+                <div>
+                    <h1 class="orbitron text-sm font-bold tracking-widest text-white">DESTINY FIGHTING CHAMPIONSHIP</h1>
+                    <p class="text-[10px] text-yellow-500 uppercase tracking-widest font-bold">A Subsidiary of Destiny Taxi Co.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6 text-xs font-bold uppercase tracking-widest overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+                <a href="#overview" class="nav-link text-gray-400 hover:text-white">Overview</a>
+                <a href="#points" class="nav-link text-gray-400 hover:text-white">Points</a>
+                <a href="#gauntlet" class="nav-link text-gray-400 hover:text-white">Gauntlet</a>
+                <a href="#rulebook" class="nav-link text-gray-400 hover:text-white">Rulebook</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="overview" class="pt-16 pb-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="bg-blue-500/10 text-blue-400 px-4 py-1 rounded-full text-xs font-bold orbitron border border-blue-500/20 mb-4 inline-block">SYSTEM STATUS: ACTIVE</span>
+                    <h2 class="text-5xl md:text-7xl orbitron font-black text-white leading-none mb-6">THE FARE IS <br><span class="text-yellow-500 italic">THE FIGHT.</span></h2>
+                    <p class="text-gray-400 text-lg max-w-lg mb-8">Welcome to the DFC. We’ve merged high-stakes RP with a professional combat hierarchy. 11 fighters, 3 weeks, and one definitive Champion.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass p-4 rounded-xl">
+                            <h4 class="text-yellow-500 orbitron text-xs mb-1 uppercase">Next Qualifier</h4>
+                            <p class="text-xl font-bold">Every Thursday</p>
+                        </div>
+                        <div class="glass p-4 rounded-xl border-l-4 border-yellow-500">
+                            <h4 class="text-yellow-500 orbitron text-xs mb-1 uppercase">Fight Night</h4>
+                            <p class="text-xl font-bold">Every Friday</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="glass p-8 rounded-3xl yellow-glow">
+                        <h3 class="orbitron text-2xl font-black mb-6 border-b border-white/10 pb-4">SEASON STRUCTURE</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="bg-yellow-500 text-black w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">01</div>
+                                <div>
+                                    <h4 class="font-bold text-white uppercase">Recruitment Phase</h4>
+                                    <p class="text-sm text-gray-400">10 Qualifier tournaments to establish the inaugural Top 10 Pro Roster.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="bg-yellow-500 text-black w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">02</div>
+                                <div>
+                                    <h4 class="font-bold text-white uppercase">The 3-Week Season</h4>
+                                    <p class="text-sm text-gray-400">Points are tracked over 21 days. Every win counts toward your permanent seed.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="bg-yellow-500 text-black w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">03</div>
+                                <div>
+                                    <h4 class="font-bold text-white uppercase">The Revolving Door</h4>
+                                    <p class="text-sm text-gray-400">Weekly Qualifier winners fight for the #10 spot. Lose your match, lose your license.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POINT SYSTEM SECTION -->
+    <section id="points" class="py-20 px-6 bg-white/[0.02]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="orbitron text-4xl font-black text-white mb-4">THE POINT ECONOMY</h2>
+                <div class="h-1 w-24 bg-yellow-500 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- BASE WIN -->
+                <div class="glass p-8 rounded-3xl border-t-4 border-yellow-500">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="orbitron font-bold text-lg text-white">MATCH WIN</h3>
+                        <span class="text-4xl font-black text-yellow-500">5P</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Standard points awarded for securing the victory in a Best of 8 series.</p>
+                    <div class="bg-black/30 p-4 rounded-xl text-xs text-gray-400 italic">
+                        "The foundation of every champion."
+                    </div>
+                </div>
+
+                <!-- DOMINANCE -->
+                <div class="glass p-8 rounded-3xl border-t-4 border-blue-500 blue-glow">
+                    <h3 class="orbitron font-bold text-lg text-white mb-6">DOMINANCE BONUSES</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center bg-blue-500/10 p-3 rounded-lg border border-blue-500/20">
+                            <span class="text-sm">5-0 Flawless</span>
+                            <span class="text-blue-400 font-bold">+2 BP</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-blue-500/5 p-3 rounded-lg border border-white/5">
+                            <span class="text-sm">5-1 Scoreline</span>
+                            <span class="text-blue-400 font-bold">+1 BP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIOLENCE -->
+                <div class="glass p-8 rounded-3xl border-t-4 border-red-500">
+                    <h3 class="orbitron font-bold text-lg text-white mb-6">EXECUTIONER BONUSES</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center bg-red-500/10 p-3 rounded-lg border border-red-500/20">
+                            <span class="text-sm">All Rounds by KO</span>
+                            <span class="text-red-400 font-bold">+2 BP</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-red-500/5 p-3 rounded-lg border border-white/5">
+                            <span class="text-sm">3+ Rounds by KO</span>
+                            <span class="text-red-400 font-bold">+1 BP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE WARRIOR POINT -->
+            <div class="mt-8 glass p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 border-dashed border-2 border-white/10">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-green-500 uppercase">The Warrior Heart</h4>
+                        <p class="text-sm text-gray-400 italic">"Losing isn't the end ."</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <span class="text-sm text-gray-500 block uppercase mb-1">Score 5-4 and Lose</span>
+                    <span class="bg-green-500 text-black px-6 py-1 rounded-full orbitron font-bold">+1 POINT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GAUNTLET SYSTEM -->
+    <section id="gauntlet" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="orbitron text-4xl font-black text-white">THE GAUNTLET MATCHMAKING</h2>
+                <p class="text-yellow-500 text-sm tracking-widest uppercase mt-2">11 Fighters. Zero Safety Nets.</p>
+            </div>
+
+            <div class="space-y-12">
+                <!-- STEP 1: RELEGATION -->
+                <div class="relative">
+                    <h3 class="text-red-500 font-bold text-center mb-4 uppercase tracking-widest italic">Level 1: Survival Match</h3>
+                    <div class="glass p-8 rounded-3xl border-red-500/50 relegation-pulse text-center">
+                        <div class="flex justify-between items-center max-w-md mx-auto">
+                            <div>
+                                <span class="text-xs text-gray-500 block">PRO</span>
+                                <span class="text-2xl font-bold">RANK #10</span>
+                            </div>
+                            <div class="bg-red-500 text-white font-black px-4 py-1 italic orbitron">VS</div>
+                            <div>
+                                <span class="text-xs text-blue-400 block">QUALIFIER</span>
+                                <span class="text-2xl font-bold text-blue-400">WINNER</span>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-6 uppercase tracking-widest">Loser is removed from the DFC Organization. Winner takes Rank #10.</p>
+                    </div>
+                </div>
+
+                <!-- STEP 2: LADDER -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 opacity-70">
+                    <div class="glass p-4 rounded-xl text-center border-white/5">
+                        <span class="text-xs text-gray-500 block">LADDER</span>
+                        <span class="font-bold">#9 vs #8</span>
+                    </div>
+                    <div class="glass p-4 rounded-xl text-center border-white/5">
+                        <span class="text-xs text-gray-500 block">LADDER</span>
+                        <span class="font-bold">#7 vs #6</span>
+                    </div>
+                    <div class="glass p-4 rounded-xl text-center border-white/5">
+                        <span class="text-xs text-gray-500 block">LADDER</span>
+                        <span class="font-bold">#5 vs #4</span>
+                    </div>
+                </div>
+
+                <!-- STEP 3: CHAMPIONSHIP -->
+                <div class="relative">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-yellow-500 text-black px-4 py-1 font-bold orbitron text-xs">MAIN EVENT</div>
+                    <div class="glass p-10 rounded-3xl yellow-glow border-yellow-500/50">
+                        <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                            <div class="text-center order-2 md:order-1">
+                                <span class="text-xs text-gray-500 block">TOP CONTENDER</span>
+                                <span class="text-2xl font-bold">#2 vs #3</span>
+                                <p class="text-[10px] text-gray-400 uppercase mt-2">Eliminator Match</p>
+                            </div>
+                            <div class="h-20 w-px bg-white/10 hidden md:block order-2"></div>
+                            <div class="text-center order-1 md:order-3 scale-110">
+                                <span class="text-xs text-yellow-500 block orbitron mb-1">FINAL BOSS</span>
+                                <span class="text-3xl font-black text-white">#1 CHAMPION</span>
+                                <div class="vs-badge bg-yellow-500 text-black px-4 py-1 mt-4 mx-auto w-fit text-sm font-black italic">VS WINNER OF 2/3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RULEBOOK SECTION -->
+    <section id="rulebook" class="py-20 px-6 bg-black">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="orbitron text-4xl font-black text-white mb-12 text-center underline decoration-yellow-500 underline-offset-8">THE DFC CODE</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="orbitron text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-yellow-500"></span> MATCH DURATION
+                        </h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Matches are contested in a <strong>Best of 8 Rounds</strong> format. The first fighter to reach 5 round wins is declared the winner of the match. Each round has a strict <strong>1 minute and 30 second</strong> limit.</p>
+                    </div>
+                    <div>
+                        <h4 class="orbitron text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-yellow-500"></span> DAMAGE JUDGING
+                        </h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">If the 90-second timer expires without a Knockout, the designated DFC Referee will determine the winner based on <strong>Health Percentage, Armor Integrity, and Effective Striking</strong>. The Referee's decision is final.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="orbitron text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-yellow-500"></span> RELEGATION POLICY
+                        </h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">The 11th fighter (weekly qualifier winner) acts as the disruptor. If the newcomer defeats Rank #10, the newcomer takes that roster spot. The defeated pro is <strong>blacklisted</strong> and must win a new qualifier to return.</p>
+                    </div>
+                    <div>
+                        <h4 class="orbitron text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-yellow-500"></span> FINANCE & PAYOUTS
+                        </h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">The Destiny Taxi Company takes a <strong>15% commission</strong> on all house bets. The remaining purse is split between the fighter's salary and the Season Prize Pool. Rank #1 earns the <strong>Champion's Dividend</strong> at the end of Week 3.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE CHAMPION'S PERK -->
+            <div class="mt-16 glass p-8 rounded-3xl border-2 border-yellow-500/30 text-center">
+                <h3 class="orbitron text-xl font-bold text-white mb-2">THE CHAMPION'S SHIELD</h3>
+                <p class="text-gray-400 text-sm max-w-2xl mx-auto">The Rank #1 Champion is exempt from relegation but <strong>MUST</strong> defend the title every Friday night against the winner of the #2 vs #3 eliminator. Failure to appear results in immediate title vacancy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-white/10 text-center">
+        <p class="orbitron text-xs text-gray-500 uppercase tracking-widest">&copy; 2024 DESTINY TAXI CO. | DFC DIVISION</p>
+        <p class="text-[10px] text-yellow-500 mt-2 italic">"You pay the fare with your health."</p>
+    </footer>
+
+</body>
+</html>
